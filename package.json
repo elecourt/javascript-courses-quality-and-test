@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "game": "node index.js",
     "test": "mocha"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "inquirer": "^8.2.0",
     "mocha": "^9.1.3"
   }
 }
