@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<body class="container">
+
+<main>
+    <div class="jumbotron">
+        <h1>This is great</h1>
+        <p>Welcome to templating using EJS</p>
+    </div>
+
+
+    <form action="/" method="post">
+      <div>
+        <label for="word">Quelle salutation voulez-vous dire ?</label>
+        <input name="word" value="Salut">
+      </div>
+
+        <div>
+        <button>Envoyer mes salutations</button>
+      </div>
+    </form>
+
+    <% if (game) { %>
+       <p>Yo ! => <%= game %></p>
+    <% } %>
+
+
+</main>
+
+</body>
+</html>
