@@ -1,47 +1,34 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require("body-parser");
 const path = require('path');
+const Game = require('./game.js');
 
-const Todos = require('./todos.js');
-
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 const app = express();
-const todos = new Todos();
+const game = new Game();
 
-
-/*let todos = new Todos();
-todos.ask().then(answers => {
-  todos.add(answers['name']);
-  console.log(todos.list());
-});*/
-
-//Here we are configuring express to use body-parser as middle-ware.
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bodies
 app.use(express.static(path.join(__dirname, 'public')));
-app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+app.listen(PORT, () => console.log(`Listening on http://localhost:${ PORT }`));
 
-app.get('/cool', (request, response) => response.send("cool"));
+app.get('/', (request, response) => {
+    response.render('pages/index', { game : game.print(),  word: game.word, numberOfTries: game.getNumberOfTries() });
+});
 
 app.post('/',(request,response) => {
     console.log(request.body);
-    todos.add(request.body.word);
-    console.log(todos.list());
-    response.render('pages/index',  { game : request.body.word });
-});
 
-// about page
-app.get('/', function(request, response) {
-    response.render('pages/index', { game : undefined });
-});
+    if(request.body.reset) {
+        console.log("Reset !");
+        game.reset();
+    } else {
+        let guess = game.guess(request.body.word)
+        console.log("Guess :" + guess);
+    }
 
-app.get('/ajax', function(req, res){
-    res.render('ajax', {title: 'An Ajax Example', quote: "AJAX is great!"});
-});
-app.post('/ajax', function(req, res){
-    res.render('ajax', {title: 'An Ajax Example', quote: req.body.quote});
+    response.render('pages/index',  { game : game.print(), word: game.word, numberOfTries: game.getNumberOfTries() });
 });
