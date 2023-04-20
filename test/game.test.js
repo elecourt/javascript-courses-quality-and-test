@@ -33,6 +33,8 @@ describe("Game test", function() {
     });
 
     it("should show only 'a' letter", function() {
+        game.word = "damien";
+        game.unknowWord = "######";
         game.guess("a");
         console.log(game.word) ;
         console.log(game.unknowWord) ;
