@@ -1,44 +1,54 @@
 const Game = require('../game.js');
-const assert = require('assert').strict;
 
-let game = new Game();
-game.word = "damien";
-game.unknowWord = "######";
+let game;
 
-describe("Game test", function() {
+beforeAll(async () => {
+    game = new Game();
+    await game.loadWords();
+    game.word = "damien"; // Setting a known word for tests
+    game.unknowWord = "######";
+});
 
-    it("The word must be 'damien'", function () {
-        assert.equal(game.word, "damien");
+describe("Game test", () => {
+
+    test("The word must be 'damien'", () => {
+        expect(game.word).toBe("damien");
     });
 
-    it("should be 5 try a the begining of the game", function () {
-        assert.equal(game.getNumberOfTries(), 5);
+    test("should be 5 tries at the beginning of the game", () => {
+        expect(game.getNumberOfTries()).toBe(5);
     });
 
-    it("test the try mechanic with a right quess", function () {
+    test("test the try mechanic with a correct guess", () => {
         game.guess("a");
-        assert.equal(game.getNumberOfTries(), 5);
+        expect(game.getNumberOfTries()).toBe(5);
     });
 
-    it("test the try mechanic with a wrong quess", function () {
+    test("test the try mechanic with an incorrect guess", () => {
         game.guess("kdjhgkfjhgdfkjhg");
-        assert.equal(game.getNumberOfTries(), 4);
+        expect(game.getNumberOfTries()).toBe(4);
     });
 
-    it("reset the game, so the number of try should be 5", function () {
+    test("reset the game, so the number of tries should be 5", () => {
         game.reset();
-        assert.equal(game.getNumberOfTries(), 5);
+        expect(game.getNumberOfTries()).toBe(5);
         game.word = "damien";
         game.unknowWord = "######";
     });
 
-    it("should show only 'a' letter", function() {
+    test("should show only 'a' letter", () => {
         game.word = "damien";
         game.unknowWord = "######";
         game.guess("a");
-        console.log(game.word) ;
-        console.log(game.unknowWord) ;
-        assert.equal(game.print(), "#a####");
+        console.log(game.word);
+        console.log(game.unknowWord);
+        expect(game.print()).toBe("#a####");
     });
+
+    test("should throw an error if no words are available", () => {
+        game.listOfWords = [];
+        expect(() => game.chooseWord()).toThrow("No words available to choose from.");
+    });
+
 
 });

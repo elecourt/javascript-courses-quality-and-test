@@ -1,34 +1,57 @@
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require("body-parser");
 const path = require('path');
 const Game = require('./game.js');
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3030;
 
 const app = express();
 const game = new Game();
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true })); // to support URL-encoded bodies
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
-app.listen(PORT, () => console.log(`Listening on http://localhost:${ PORT }`));
 
+// Routes
 app.get('/', (request, response) => {
-    response.render('pages/index', { game : game.print(),  word: game.word, numberOfTries: game.getNumberOfTries() });
+    response.render('pages/index', {
+        game: game.print(),
+        word: game.word,
+        numberOfTries: game.getNumberOfTries()
+    });
 });
 
-app.post('/',(request,response) => {
-    console.log(request.body);
+app.post('/', (request, response) => {
+    try {
+        if (request.body.reset) {
+            console.log("Reset !");
+            game.reset();
+        } else if (request.body.word) {
+            let guess = game.guess(request.body.word);
+            console.log("Guess :" + guess);
+        } else {
+            console.log("No word provided in the request body.");
+        }
 
-    if(request.body.reset) {
-        console.log("Reset !");
-        game.reset();
-    } else {
-        let guess = game.guess(request.body.word)
-        console.log("Guess :" + guess);
+        response.render('pages/index', {
+            game: game.print(),
+            word: game.word,
+            numberOfTries: game.getNumberOfTries()
+        });
+    } catch (error) {
+        console.error(error.message);
+        response.status(500).send("An error occurred: " + error.message);
     }
-
-    response.render('pages/index',  { game : game.print(), word: game.word, numberOfTries: game.getNumberOfTries() });
 });
+
+
+(async () => {
+    try {
+        await game.loadWords();
+        app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
+    } catch (error) {
+        console.error("Failed to load words and start the server:", error);
+    }
+})();
