@@ -10,19 +10,23 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js 16.x
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
-        cache: 'npm'
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - run: npm ci
-    - run: npm run test
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm' # Cache npm dependencies
 
-    #- uses: akhileshns/heroku-deploy@v3.12.13 # This is the action
-    #  with:
-    #    heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-    #    heroku_app_name: "async-mocha-test" #Must be unique in Heroku
-    #    heroku_email: "damien@async-agency.com"
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test
+
+      - name: Display test results
+        if: failure() # This step runs only if the tests fail
+        run: cat ./test-results.txt || echo "No test results file found"
