@@ -1,5 +1,5 @@
 <meta charset="UTF-8">
-<title>The Hangman game</title>
+<title>Jeu du Pendu</title>
 
 <!-- UIkit CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.10.1/dist/css/uikit.min.css" />
@@ -21,4 +21,21 @@
     h1, h2, h3 {
         color: aliceblue;
     }
+
+    #today-scores ul {
+    list-style-type: none; /* Assure-toi que les éléments de liste sont visibles */
+    padding: 0;
+}
+
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/leaderboard') 
+            .then(response => response.json())
+            .then(data => {
+                const todayScoresList = document.getElementById('today-scores').querySelector('ul');
+                todayScoresList.innerHTML = data.map(score => `<li>${score.pseudo} ... ${score.score} points</li>`).join('');
+            });
+    });
+</script>

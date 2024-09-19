@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head'); %>
+    <meta charset="UTF-8">
+    <title>Classement des Meilleurs Scores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        .score-section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        #today-scores ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #today-scores li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        #today-scores li:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="score-section">
+            <h2>Meilleur score du jour</h2>
+            <div class="score-list" id="today-scores">
+              <ul>
+              </ul>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
