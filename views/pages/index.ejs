@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Jeu du pendu en ligne. Essayez de deviner le mot avant de manquer d'essais.">
     <title>Jeu du Pendu</title>
-    <!-- Inclure Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
@@ -18,7 +17,6 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background-image: url('https://example.com/background-image.jpg'); /* Remplacez par une image de fond */
             background-size: cover;
             background-position: center;
         }
@@ -113,7 +111,6 @@
             const formWrapper = document.querySelector('#formWrapper');
             const usernameDisplay = document.querySelector('#usernameDisplay');
 
-            // Afficher un message avec le nom d'utilisateur si le formulaire est déjà soumis
             const storedUsername = localStorage.getItem('username');
             if (storedUsername) {
                 formWrapper.classList.add('hidden');
@@ -145,14 +142,11 @@
             <h1>🎯 Le jeu du pendu 🎯</h1>
             <p>Essayez de deviner le mot avant de manquer d'essais !</p>
 
-            <!-- Affichage du score final et du formulaire pour le pseudo si le jeu est terminé -->
             <% if (played) { %>
                 <h2>Votre score : <%= score %></h2>
                 
-                <!-- Affichage du mot complet si le jeu est terminé -->
                 <h3>Le mot était : <%= word %></h3>
 
-                <!-- Formulaire pour entrer le pseudo et enregistrer le score -->
                 <div id="formWrapper">
                     <form action="/" method="post">
                         <fieldset>
@@ -165,13 +159,10 @@
                     </form>
                 </div>
 
-                <!-- Affichage du message de remerciement avec le pseudo -->
                 <div id="usernameDisplay" class="hidden"></div>
 
-                <!-- Lien vers le classement -->
                 <p><a href="/leaderboard">Voir le classement des meilleurs scores</a></p>
 
-                <!-- Boutons de partage avec icônes -->
                 <div class="social-buttons">
                     <h3>Partagez votre score :</h3>
                     <a href="https://twitter.com/intent/tweet?text=J'ai joué au jeu du pendu et mon score est <%= score %> ! Rejoignez-moi sur https://votre-site-web.com" target="_blank" aria-label="Partager sur Twitter">
@@ -183,7 +174,6 @@
                 </div>
 
             <% } else { %>
-                <!-- Formulaire de jeu normal -->
                 <form action="/" method="post">
                     <fieldset>
                         <legend>Nombre d'essais restants : <%= numberOfTries %></legend>
@@ -194,18 +184,15 @@
                     </fieldset>
                 </form>
 
-                <!-- Affichage du mot partiellement deviné -->
                 <% if (game) { %>
                     <h3>Votre mot : <%= game %></h3>
                 <% } %>
 
-                <!-- Affichage du mot complet si le joueur a épuisé ses essais -->
                 <% if (numberOfTries <= 0) { %>
                     <h3>Le mot était : <%= word %></h3>
                 <% } %>
             <% } %>
         </div>
-        <!-- Zone de dessin du pendu -->
         <div class="hangman-container">
             <canvas id="hangmanCanvas"></canvas>
         </div>
@@ -215,7 +202,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const canvas = document.getElementById('hangmanCanvas');
             const ctx = canvas.getContext('2d');
-            const numParts = 6; // Nombre total de parties du pendu
+            const numParts = 6;
             const lineLength = 60;
 
             function drawHangman(tries) {
@@ -223,73 +210,62 @@
                 ctx.strokeStyle = '#333';
                 ctx.lineWidth = 2;
 
-                // Dessiner les différentes parties du pendu
                 if (tries <= numParts) {
-                    // Base
                     ctx.beginPath();
                     ctx.moveTo(10, canvas.height - 10);
                     ctx.lineTo(canvas.width - 10, canvas.height - 10);
                     ctx.stroke();
 
-                    // Poteau
                     ctx.beginPath();
                     ctx.moveTo(30, canvas.height - 10);
-                    ctx.lineTo(30, canvas.height - canvas.height / 2 - 10); // Ajuster hauteur
+                    ctx.lineTo(30, canvas.height - canvas.height / 2 - 10);
                     ctx.stroke();
 
-                    // Traverse
                     ctx.beginPath();
                     ctx.moveTo(30, canvas.height - canvas.height / 2 - 10);
                     ctx.lineTo(canvas.width / 2, canvas.height - canvas.height / 2 - 10);
                     ctx.stroke();
 
-                    // Support
                     ctx.beginPath();
                     ctx.moveTo(canvas.width / 2, canvas.height - canvas.height / 2 - 10);
                     ctx.lineTo(canvas.width / 2, canvas.height - canvas.height / 4 * 1.7);
                     ctx.stroke();
 
-                    // Tête
-                    if (tries <= numParts - 6) {
+                    if (tries <= numParts - 1) {
                         ctx.beginPath();
-                        ctx.arc(canvas.width / 2, canvas.height - canvas.height / 4 * 1.82 + 30, 20, 0, 2 * Math.PI); // Ajuster la position de la tête
+                        ctx.arc(canvas.width / 2, canvas.height - canvas.height / 4 * 1.82 + 30, 20, 0, 2 * Math.PI); 
                         ctx.stroke();
                     }
 
-                    // Corps
-                    if (tries <= numParts - 5) {
+                    if (tries <= numParts - 2) {
                         ctx.beginPath();
                         ctx.moveTo(canvas.width / 2, canvas.height - canvas.height / 4 * 1.8 + 50);
                         ctx.lineTo(canvas.width / 2, canvas.height - canvas.height / 4 * 1.7 + 80);
                         ctx.stroke();
                     }
 
-                    // Bras Gauche
-                    if (tries <= numParts - 4) {
+                    if (tries <= numParts - 3) {
                         ctx.beginPath();
                         ctx.moveTo(canvas.width / 2, canvas.height - canvas.height / 4 * 1.7 + 60);
                         ctx.lineTo(canvas.width / 2 - lineLength, canvas.height - canvas.height / 4 * 1.7 + 70);
                         ctx.stroke();
                     }
 
-                    // Bras Droit
-                    if (tries <= numParts - 3) {
+                    if (tries <= numParts - 4) {
                         ctx.beginPath();
                         ctx.moveTo(canvas.width / 2, canvas.height - canvas.height / 4 * 1.7 + 60);
                         ctx.lineTo(canvas.width / 2 + lineLength, canvas.height - canvas.height / 4 * 1.7 + 70);
                         ctx.stroke();
                     }
 
-                    // Jambe Gauche
-                    if (tries <= numParts - 2) {
+                    if (tries <= numParts - 5) {
                         ctx.beginPath();
                         ctx.moveTo(canvas.width / 2, canvas.height - canvas.height / 4 * 1.7 + 80);
                         ctx.lineTo(canvas.width / 2 - lineLength, canvas.height - canvas.height / 4 * 1.7 + 100);
                         ctx.stroke();
                     }
 
-                    // Jambe Droite
-                    if (tries <= numParts - 1) {
+                    if (tries <= numParts - 6) {
                         ctx.beginPath();
                         ctx.moveTo(canvas.width / 2, canvas.height - canvas.height / 4 * 1.7 + 80);
                         ctx.lineTo(canvas.width / 2 + lineLength, canvas.height - canvas.height / 4 * 1.7 + 100);
@@ -298,7 +274,6 @@
                 }
             }
 
-            // Initialisation du canvas
             canvas.width = 300;
             canvas.height = 300;
             drawHangman(<%= numberOfTries %>);

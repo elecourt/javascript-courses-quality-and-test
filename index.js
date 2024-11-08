@@ -12,7 +12,7 @@ const app = express();
 const db = new sqlite3.Database('./scores.db');
 const game = new Game();
 
-// Middleware
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -21,15 +21,15 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: { 
-        maxAge: 86400000, // 24 hours
-        secure: process.env.NODE_ENV === 'production', // Secure cookies in production
-        httpOnly: true,  // Prevent JavaScript access
-        sameSite: 'strict' // CSRF protection
+        maxAge: 86400000, 
+        secure: process.env.NODE_ENV === 'production', 
+        httpOnly: true, 
+        sameSite: 'strict' 
     }
 }));
 app.set('view engine', 'ejs');
 
-// Créer la table 'scores' si elle n'existe pas
+
 db.run(`CREATE TABLE IF NOT EXISTS players (
     id INTEGER PRIMARY KEY,
     pseudo TEXT,
@@ -44,7 +44,7 @@ db.run(`CREATE TABLE IF NOT EXISTS players (
     }
 });
 
-// Routes
+
 app.get('/', (req, res) => {
     try {
         const today = new Date().toDateString();
