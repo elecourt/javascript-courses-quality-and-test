@@ -8,5 +8,8 @@ module.exports = defineConfig({
         headless: true, 
         browserName: 'chromium',
     },
-    reporter: [['html', { outputFolder: 'playwright-report' }]], 
+    reporter: [
+      ['html'],
+      ['@estruyf/github-actions-reporter']
+    ],
 });
