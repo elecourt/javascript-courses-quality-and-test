@@ -1,39 +1,42 @@
-# Hangman Game
+# Projet Jeu du Pendu
 
-This is a small project to build a classic Hangman game in JavaScript.
-The primary goal of this project is to practice and learn how to write tests using various tools and frameworks, including Jest.
+Un jeu du pendu interactif développé avec Node.js, Playwright pour les tests end-to-end, et Jest pour les tests unitaires. Ce projet inclut une CI/CD complète avec GitHub Actions pour automatiser les tests, l'intégration continue et le déploiement.
 
-**Test-Driven Development:** The project is structured to encourage writing tests for each feature of the game.
+## Badges
 
-## Getting Started
+[![CI](https://img.shields.io/github/workflow/status/elecourt/javascript-courses-quality-and-test/CI)](https://github.com/elecourt/javascript-courses-quality-and-test/actions?query=workflow%3ACI)  
+[![Jest](https://img.shields.io/github/workflow/status/elecourt/javascript-courses-quality-and-test/Jest)](https://github.com/elecourt/javascript-courses-quality-and-test/actions?query=workflow%3AJest)  
+[![Coverage](https://img.shields.io/coveralls/github/elecourt/javascript-courses-quality-and-test)](https://coveralls.io/github/elecourt/javascript-courses-quality-and-test)
 
-### Running the Game
+## Description
 
-To start the game, copy and paste the .env.example file to .env and set the PORT variable to 3030.
+Le projet implémente un jeu du pendu où les utilisateurs doivent deviner un mot en entrant des lettres. Si l'utilisateur entre une lettre incorrecte trop de fois, il perd la partie. Le projet utilise Playwright pour les tests end-to-end et Jest pour les tests unitaires, avec des outils d'intégration continue pour garantir la qualité du code.
 
-Then use the following command:
+## Prérequis
 
-```bash
-npm start
-```
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur votre machine locale :
 
-This will start the server, and you can play the game by visiting `http://localhost:3030` in your browser.
+- [Node.js](https://nodejs.org/) (version 20 ou supérieure)
+- [npm](https://www.npmjs.com/) (le gestionnaire de paquets de Node.js)
 
-### Running Tests
+## Installation
 
-This project uses Jest for testing. To run the tests, use the following command:
+1. Clonez le dépôt sur votre machine locale :
+   ```bash
+   git clone https://github.com/votre-utilisateur/votre-repository.git
 
-```bash
-npm test
-```
+2. Accédez au répertoire du projet :
+   ```bash
+   cd votre-repository
 
-The tests are designed to ensure that the game logic works correctly and to demonstrate best practices in test-driven development.
+3. Installez les dépendances :
+   ```bash
+   npm install
 
-## Project Structure
+## Lancer le projet
 
-- **`game.js`**: Contains the core game logic.
-- **`tools.js`**: Utility functions used in the game.
-- **`test/`**: Contains test files for each module (e.g., `game.test.js`, `tools.test.js`).
-- **`index.js`**: Main server file that sets up the Express app and routes.
-- **`public/`**: Static files such as HTML, CSS, and client-side JavaScript.
-- **`views/`**: EJS templates used to render the game interface.
+Pour démarrer le projet en mode développement, utilisez la commande suivante :
+   ```bash
+   npm start
+
+Cela démarrera un serveur local (par défaut sur http://localhost:3030).

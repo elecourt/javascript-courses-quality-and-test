@@ -45,5 +45,8 @@ jobs:
       - name: Run Playwright Tests with Report Generation
         run: npx playwright test --reporter=html --output=playwright-report
 
+      - name: Coverage badges generation action
+        uses: jpb06/coverage-badges-action@v1.0.13
+
       - name: Stop server
         run: killall node
