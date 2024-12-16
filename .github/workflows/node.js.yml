@@ -24,9 +24,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run tests
-        run: npm test
+      - name: Run Unit Tests (test:unit)
+        run: npm run test:unit
 
-      - name: Display test results
+      - name: Run End-to-End Tests (test:e2e)
+        run: npm run test:e2e
+
+      - name: Run Playwright Tests with Report Generation
+        run: npx playwright test --reporter=html --output=playwright-report
+
+      - name: Display test results (Playwright HTML Report)
         if: failure() # This step runs only if the tests fail
-        run: cat ./test-results.txt || echo "No test results file found"
+        run: cat ./playwright-report/index.html || echo "No Playwright test results file found"
