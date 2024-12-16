@@ -1,4 +1,4 @@
-# Projet Jeu du Pendu
+# 🎯 Projet Jeu du Pendu 🎯
 
 Un jeu du pendu interactif développé avec Node.js, Playwright pour les tests end-to-end, et Jest pour les tests unitaires. Ce projet inclut une CI/CD complète avec GitHub Actions pour automatiser les tests, l'intégration continue et le déploiement.
 
