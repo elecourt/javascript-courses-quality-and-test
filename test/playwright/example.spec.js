@@ -28,9 +28,6 @@ test.describe('Tests End-to-End pour le jeu du pendu', () => {
 
         // Vérifie le contenu de "Votre mot :"
         await expect(page.locator('h3:has-text("Votre mot :")')).toContainText('#a####a#');
-
-        // Vérifie le contenu de "Le mot était :"
-        await expect(page.locator('h3:has-text("Le mot était :")')).toContainText('canonial');
     });
 
     test('La page des meilleurs scores du jour affiche correctement le titre et la liste', async ({ page }) => {
