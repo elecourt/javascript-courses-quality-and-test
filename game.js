@@ -13,24 +13,22 @@ class Game {
         this.unknowWord = null;
     }
 
-    // Charger les mots à partir d'un fichier CSV
     loadWords() {
         return new Promise((resolve, reject) => {
             fs.createReadStream('words_fr.txt')
                 .pipe(csv())
                 .on('data', (row) => {
-                    this.listOfWords.push(row.word.toLowerCase()); // Ajout des mots dans la liste
+                    this.listOfWords.push(row.word.toLowerCase());
                 })
                 .on('end', () => {
                     console.log('CSV file successfully processed');
-                    this.chooseWord(); // Choisir un mot dès que le fichier est chargé
+                    this.chooseWord();
                     resolve();
                 })
                 .on('error', reject);
         });
     }
 
-    // Choisir un mot basé sur une valeur de hachage
     chooseWord() {
         if (this.listOfWords.length > 0) {
             const dateHash = crypto.createHash('md5').update(new Date().toDateString()).digest('hex');
@@ -43,7 +41,6 @@ class Game {
         }
     }
 
-    // Deviner une lettre
     guess(oneLetter) {
         if (!this.word) {
             throw new Error("The word has not been set. Please ensure that the game has been initialized properly.");
@@ -52,7 +49,6 @@ class Game {
         let found = false;
         let newUnknowWord = '';
 
-        // Vérifier chaque lettre du mot
         for (let i = 0; i < this.word.length; i++) {
             if (this.word[i] === oneLetter) {
                 newUnknowWord += oneLetter;
@@ -64,64 +60,54 @@ class Game {
 
         this.unknowWord = newUnknowWord;
 
-        // Si la lettre n'est pas trouvée, diminuer les tentatives et le score
         if (!found) {
             this.numberOfTry--;
-            this.score -= 50;  // Réduction du score en cas de mauvaise réponse
+            this.score -= 50;
         }
 
         return found;
     }
 
-    // Calculer le score
     calculateScore() {
-        const elapsedTime = Math.floor((Date.now() - this.startTime) / 1000); // Temps écoulé en secondes
-        this.score -= elapsedTime; // Réduction du score selon le temps
-        if (this.score < 0) this.score = 0; // Le score ne peut pas être inférieur à 0
+        const elapsedTime = Math.floor((Date.now() - this.startTime) / 1000);
+        this.score -= elapsedTime;
+        if (this.score < 0) this.score = 0; 
         return this.score;
     }
 
-    // Récupérer le score actuel
     getScore() {
         return this.calculateScore(); 
     }
 
-    // Afficher l'état actuel du mot avec les lettres devinées
     print() {
         return this.unknowWord;
     }
 
-    // Récupérer le nombre de tentatives restantes
     getNumberOfTries() {
         return this.numberOfTry;
     }
 
-    // Réinitialiser le jeu
     reset() {
         this.numberOfTry = 5;
         this.score = 1000;
-        this.chooseWord(); // Choisir un nouveau mot
-        this.startTime = Date.now(); // Réinitialiser l'heure de début
+        this.chooseWord();
+        this.startTime = Date.now();
     }
 
-    // Vérifier si le jeu est terminé
     isGameOver() {
         return this.numberOfTry === 0 || !this.unknowWord.includes('#');
     }
 
-    // Générer et trier les meilleurs scores
     hightScoreGenerator(liste) {
         var x = liste.length;
         
-        // Remplir la liste jusqu'à 1000 joueurs avec des scores allant de 500 à 1
         while (x < 1000) {
             var pseudo = "player" + String(x);
-            var score = Math.max(500 - x, 1);  // Garantir que le score ne soit jamais inférieur à 1
+            var score = Math.max(500 - x, 1);
             liste.push({ pseudo: pseudo, score: score });
             x++;
         }
     
-        // Trier la liste par score en ordre décroissant
         liste.sort((a, b) => b.score - a.score);
     
         return liste;
