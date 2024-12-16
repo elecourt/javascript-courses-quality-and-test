@@ -66,4 +66,4 @@ Cela exécutera les tests Playwright dans un environnement simulé pour vérifie
 Ce projet est configuré avec GitHub Actions pour automatiser les tests sur chaque push et pull request vers la branche main. Les résultats des tests sont visibles dans l'onglet Actions de GitHub.
 
 
-## 🎉 Merci d’avoir consulté ce projet ! Amusez-vous bien avec le jeu du pendu ! 😊
+🎉 Merci d’avoir consulté ce projet ! Amusez-vous bien avec le jeu du pendu ! 😊
