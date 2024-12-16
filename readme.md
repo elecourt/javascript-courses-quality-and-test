@@ -6,6 +6,10 @@ Un jeu du pendu interactif développé avec Node.js, Playwright pour les tests e
 
 [![Test](https://github.com/elecourt/javascript-courses-quality-and-test/actions/workflows/node.js.yml/badge.svg)](https://github.com/elecourt/javascript-courses-quality-and-test/actions/workflows/node.js.yml)
 ![Coverage](https://raw.githubusercontent.com/elecourt/javascript-courses-quality-and-test/main/badges/coverage-total.svg)
+![Coverage](https://raw.githubusercontent.com/elecourt/javascript-courses-quality-and-test/main/badges/coverage-branches.svg)
+![Coverage](https://raw.githubusercontent.com/elecourt/javascript-courses-quality-and-test/main/badges/coverage-functions.svg)
+![Coverage](https://raw.githubusercontent.com/elecourt/javascript-courses-quality-and-test/main/badges/coverage-lines.svg)
+![Coverage](https://raw.githubusercontent.com/elecourt/javascript-courses-quality-and-test/main/badges/coverage-statements.svg)
 
 
 ## Description
