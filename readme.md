@@ -12,7 +12,7 @@ Un jeu du pendu interactif développé avec Node.js, Playwright pour les tests e
 ![Coverage](https://raw.githubusercontent.com/elecourt/javascript-courses-quality-and-test/main/badges/coverage-statements.svg)
 
 
-## Description
+## 🌟 Description
 
 Le projet implémente un jeu du pendu où les utilisateurs doivent deviner un mot en entrant des lettres. Si l'utilisateur entre une lettre incorrecte trop de fois, il perd la partie. Le projet utilise Playwright pour les tests end-to-end et Jest pour les tests unitaires, avec des outils d'intégration continue pour garantir la qualité du code.
 
@@ -23,7 +23,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur v
 - [Node.js](https://nodejs.org/) (version 20 ou supérieure)
 - [npm](https://www.npmjs.com/) (le gestionnaire de paquets de Node.js)
 
-## Installation
+## 🚀 Installation
 
 1. Clonez le dépôt sur votre machine locale :
    ```bash
@@ -33,7 +33,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur v
    ```bash
    npm install
 
-## Lancer le projet
+## 🔍 Lancer le projet
 
 Pour démarrer le projet en mode développement, utilisez la commande suivante :
 ```bash
@@ -42,7 +42,7 @@ Pour démarrer le projet en mode développement, utilisez la commande suivante :
     
 Cela démarrera un serveur local (par défaut sur http://localhost:3030).
 
-## Lancer les tests
+## 🧪 Lancer les tests
 #### Tests unitaires avec Jest
 
 Pour exécuter les tests unitaires, utilisez la commande suivante :
@@ -61,6 +61,6 @@ Pour exécuter les tests end-to-end, assurez-vous que le serveur local est déma
 
 Cela exécutera les tests Playwright dans un environnement simulé pour vérifier l'intégrité de votre application dans un navigateur.
 
-## Intégration continue
+## 📄 Intégration continue
 
 Ce projet est configuré avec GitHub Actions pour automatiser les tests sur chaque push et pull request vers la branche main. Les résultats des tests sont visibles dans l'onglet Actions de GitHub.
