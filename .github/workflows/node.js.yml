@@ -19,10 +19,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20'
-          cache: 'npm' # Cache npm dependencies
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
+
+      # Install Playwright browsers
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
       - name: Start application
         run: npm start &
@@ -41,6 +45,5 @@ jobs:
       - name: Run Playwright Tests with Report Generation
         run: npx playwright test --reporter=html --output=playwright-report
 
-      - name: Display test results (Playwright HTML Report)
-        if: failure() # This step runs only if the tests fail
-        run: cat ./playwright-report/index.html || echo "No Playwright test results file found"
+      - name: Stop server
+        run: killall node
