@@ -3,4 +3,5 @@ module.exports = {
     testMatch: ['**/test/jest/*.test.js'],
     collectCoverage: true,
     coverageDirectory: './coverage',
+    coverageReporters: ["json-summary"],
 };
