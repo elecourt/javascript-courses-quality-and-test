@@ -15,21 +15,21 @@ describe("Game test", () => {
         expect(game.word).toBe("emeline");
     });
 
-    test("should be 5 tries at the beginning of the game", () => {
+    test("5 tries for the game", () => {
         expect(game.getNumberOfTries()).toBe(5);
     });
 
-    test("test the try mechanic with a correct guess", () => {
+    test("test with correct guess", () => {
         game.guess("e");
         expect(game.getNumberOfTries()).toBe(5);
     });
 
-    test("test the try mechanic with an incorrect guess", () => {
+    test("test with an incorrect guess", () => {
         game.guess("x");
         expect(game.getNumberOfTries()).toBe(4);
     });
 
-    test("reset the game, so the number of tries should be 5", () => {
+    test("reset the game", () => {
         game.reset();
         expect(game.getNumberOfTries()).toBe(5);
         game.word = "emeline";
@@ -38,19 +38,19 @@ describe("Game test", () => {
         expect(game.unknowWord).toBe("#######");
     });
 
-    test("should show only 'e' letter after guessing 'e'", () => {
+    test("show only 'e'", () => {
         game.word = "emeline";
         game.unknowWord = "#######";
         game.guess("e");
         expect(game.print()).toBe("e#e###e");
     });
 
-    test("should throw an error if no words are available", () => {
+    test("throw an error if no words are available", () => {
         game.listOfWords = [];
         expect(() => game.chooseWord()).toThrow("No words available to choose from.");
     });
 
-    test("should calculate score based on elapsed time", () => {
+    test("calculate score based on elapsed time", () => {
         jest.useFakeTimers('modern');
         jest.setSystemTime(new Date(2024, 8, 19, 12, 0, 0));
         game.startTime = Date.now() - 10000;
@@ -81,7 +81,7 @@ describe("Game test", () => {
         expect(game.isGameOver()).toBe(false);
     });
 
-    test("hightScoreGenerator should generate and sort high scores", () => {
+    test("generate hightScoreGenerator", () => {
         const highScores = [];
         const result = game.hightScoreGenerator(highScores);
         expect(result.length).toBe(1000);
