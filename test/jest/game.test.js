@@ -19,12 +19,12 @@ describe("Game test", () => {
         expect(game.getNumberOfTries()).toBe(5);
     });
 
-    test("test with correct guess", () => {
+    test("with correct guess", () => {
         game.guess("e");
         expect(game.getNumberOfTries()).toBe(5);
     });
 
-    test("test with an incorrect guess", () => {
+    test("with an incorrect guess", () => {
         game.guess("x");
         expect(game.getNumberOfTries()).toBe(4);
     });
