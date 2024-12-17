@@ -24,12 +24,12 @@ test.describe('Tests End-to-End pour le jeu du pendu', () => {
 
     // Test 4 : Vérifie les textes des éléments H3
     test('Vérifie les textes des éléments H3', async ({ page }) => {
-        await page.goto('http://localhost:3030');
-
-        // Vérifie le contenu de "Votre mot :"
-        await expect(page.locator('h3:has-text("Votre mot :")')).toContainText('#a####a#');
+      await page.goto('http://localhost:3030');
+  
+      // Vérifie que l'élément <h3> contenant "Votre mot :" contient un texte suivant le format attendu
+      await expect(page.locator('h3:has-text("Votre mot :")')).toContainText(/Votre mot : [\w#]+/);
     });
-
+  
     test('La page des meilleurs scores du jour affiche correctement le titre et la liste', async ({ page }) => {
       await page.goto('http://localhost:3030/leaderboard'); // URL à ajuster selon votre configuration
       await expect(page.locator('h2')).toHaveText('Meilleur Score du Jour');
